@@ -32,8 +32,13 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+       
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -45,13 +50,24 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         moveInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        moveInput = transform.TransformDirection(moveInput) * walkSpeed;
-        
+        //moveInput = transform.TransformDirection(moveInput) * walkSpeed;
+        moveInput = Vector3.ClampMagnitude(moveInput, 1f);
+
+        /*
+        if (Input.GetButton("Sprint"))
+        {
+            moveInput = transform.TransformDirection(moveInput) * runSpeed;
+        }*/
 
         if (Input.GetButton("Sprint"))
         {
+            moveInput = transform.TransformDirection(moveInput) * runSpeed;
+        }
+        else
+        {
             moveInput = transform.TransformDirection(moveInput) * walkSpeed;
         }
+
         if (Input.GetButtonDown("Jump"))
         {
             moveInput.y = Mathf.Sqrt(jumpHeight * -2f * gravityScale);

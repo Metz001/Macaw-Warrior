@@ -60,3 +60,16 @@ Update Mode: mergeDefaultDependencies
 
 The following packages were added:
   com.unity.postprocessing@3.2.2
+
+=== Fri Oct 20 09:13:47 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were added:
+  com.unity.ai.navigation@1.1.4
+The following packages were updated:
+  com.unity.collab-proxy from version 2.0.4 to 2.0.7
+  com.unity.ide.rider from version 3.0.21 to 3.0.24
+  com.unity.timeline from version 1.6.5 to 1.7.5
+  com.unity.visualscripting from version 1.8.0 to 1.9.0
