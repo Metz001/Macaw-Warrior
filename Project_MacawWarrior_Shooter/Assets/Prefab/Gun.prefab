@@ -431,7 +431,7 @@ Transform:
   m_Children:
   - {fileID: 3832703582600944450}
   - {fileID: 3832703582600944452}
-  - {fileID: 4511917930337162535}
+  - {fileID: 222798485524286201}
   - {fileID: 3832703582600944454}
   - {fileID: 3832703582600944456}
   m_Father: {fileID: 0}
@@ -448,6 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed33e4fe7ca762b44bf371904fafa82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponMuzzle: {fileID: 222798485524286201}
   hittableLayer:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -455,15 +456,20 @@ MonoBehaviour:
   fireRange: 200
   recoilForce: 2
   cameraPlayerTransform: {fileID: 0}
+  fireRate: 0.4
   ammoText: {fileID: 8781903703807361986}
   ammoMax: 25
+  reloadTime: 1.5
+  ammoCount: 0
   shockBatteryCount:
   - {fileID: 472572563710700290}
   - {fileID: 8397421511281852786}
   - {fileID: 3095697563486309584}
   - {fileID: 4851330468167615388}
-  reloadTime: 1.5
-  ammoCount: 0
+  shockMode: 0
+  shockCount: 0
+  flashEffect: {fileID: 2783592464918300876, guid: b710cf8ab51c8a84293b467e854ddc56, type: 3}
+  shockFlashEffect: {fileID: 2783592464918300876, guid: ba1588eac89ff4a4f90136b8543c0d0c, type: 3}
   timeToCharge: 2
 --- !u!114 &2870213658565742350
 MonoBehaviour:
@@ -914,6 +920,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &4075045560492724952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 222798485524286201}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &222798485524286201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4075045560492724952}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.5735764, z: 0, w: 0.8191521}
+  m_LocalPosition: {x: 0.7020226, y: 0.3310955, z: 0.000005364418}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3832703582600944448}
+  m_LocalEulerAnglesHint: {x: 0, y: -70, z: 0}
 --- !u!1 &4851330468167615388
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,37 +1026,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &7209487872529262378
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4511917930337162535}
-  m_Layer: 8
-  m_Name: Hole
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4511917930337162535
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7209487872529262378}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7096, y: 0.3310955, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3832703582600944448}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8397421511281852786
 GameObject:
   m_ObjectHideFlags: 0
