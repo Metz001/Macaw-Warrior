@@ -1,13 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+    [Header("General")]
+    public LayerMask hittableLayer;
+    public GameObject bulletHolePrefab;
 
 
+    [Header("Shoot Parameter")]
+    public float fireRange = 200; //distacia que recorre la bala
+    public float recoilForce = 4f; //retroceso
+
+
+
+    public Transform cameraPlayerTransform;
     [Header("Ammo Settings")]
     public TextMeshProUGUI ammoText;    //Texto del arma en UI
     public int ammoMax; //Máxima munición para esta arma
@@ -29,12 +41,14 @@ public class WeaponController : MonoBehaviour
     public float timeToCharge;
 
 
-    
-    
+
+  
 
     // Start is called before the first frame update
     void Start()
-    {     
+    {
+        cameraPlayerTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
+
         ammoCount = ammoMax;
         ammoText.text = ammoMax.ToString();
         
@@ -45,7 +59,7 @@ public class WeaponController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {      
         //Cambio a shock
         if (Input.GetButtonDown("Fire2"))
         {                    
@@ -56,37 +70,9 @@ public class WeaponController : MonoBehaviour
 
             Debug.Log("Cambio de modo, shock " + shockMode);
         }
-      
 
         //Disparo
-        if (Input.GetButtonDown("Fire1") && isReloading == false)
-        {
-            if (ammoCount > 0 && shockMode == false)
-            {
-                //Intancia balas
-                ammoCount--;
-                ammoText.text = ammoCount.ToString();
-            }
-            else if (ammoCount == 0 && shockMode == false)
-            {
-                //Sonido de falta de balas
-                //Llamada de Ui Manager ("No tienes balas")
-                Debug.Log("No hay balas");
-            }
-
-            if(shockCount > 0 && shockMode == true)
-            {
-                shockCount--;
-                batteryUi(shockCount);
-            }
-            else if(shockCount == 0 && shockMode == true)
-            {
-                //Sonido de falta de balas
-                //Llamada de Ui Manager ("No tienes balas")
-                Debug.Log("No hay batería");
-            }
-
-        }
+        HandleShot();
 
         //recarga balas
         if (Input.GetKeyDown(KeyCode.R) && isReloading == false)
@@ -113,8 +99,56 @@ public class WeaponController : MonoBehaviour
             //if(shockCount == 4)
           //  StopCoroutine("ShockCharger");
         }*/
-               
+        transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * 5);    
     }
+
+    private void HandleShot()
+    {
+        if (Input.GetButtonDown("Fire1") && isReloading == false)
+        {
+            if (ammoCount > 0 && shockMode == false)
+            {
+                AddRecoil(recoilForce);
+                RaycastHit hit;
+                if(Physics.Raycast(cameraPlayerTransform.position, cameraPlayerTransform.forward, out hit, fireRange, hittableLayer))
+                {
+                    GameObject bulletHoleClone = Instantiate(bulletHolePrefab,hit.point + hit.normal *0.0001f,Quaternion.LookRotation(hit.normal));
+                    Destroy(bulletHoleClone, 4f);
+                }
+                //Intancia balas
+                ammoCount--;
+                ammoText.text = ammoCount.ToString();
+            }
+            else if (ammoCount == 0 && shockMode == false)
+            {
+                //Sonido de falta de balas
+                //Llamada de Ui Manager ("No tienes balas")
+                Debug.Log("No hay balas");
+            }
+
+            if (shockCount > 0 && shockMode == true)
+            {
+                AddRecoil(recoilForce/2f);
+                shockCount--;
+                batteryUi(shockCount);
+            }
+            else if (shockCount == 0 && shockMode == true)
+            {
+                //Sonido de falta de balas
+                //Llamada de Ui Manager ("No tienes balas")
+                Debug.Log("No hay batería");
+            }
+
+        }
+    }
+
+    private void AddRecoil(float recoilForce_)
+    {
+        transform.Rotate(-recoilForce_, 0f, 0f);
+        transform.position = transform.position - transform.forward * (recoilForce_/50f);
+
+    }
+
     void batteryUi(int x)
     {
        

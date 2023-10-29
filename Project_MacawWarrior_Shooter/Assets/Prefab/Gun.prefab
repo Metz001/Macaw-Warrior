@@ -448,6 +448,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed33e4fe7ca762b44bf371904fafa82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hittableLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  bulletHolePrefab: {fileID: 3173277393648482439, guid: 17f0f99e83fc020408fd77913efa9047, type: 3}
+  fireRange: 200
+  recoilForce: 2
+  cameraPlayerTransform: {fileID: 0}
   ammoText: {fileID: 8781903703807361986}
   ammoMax: 25
   shockBatteryCount:
