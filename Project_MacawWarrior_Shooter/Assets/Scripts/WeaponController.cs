@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using TreeEditor;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -15,7 +13,6 @@ public class WeaponController : MonoBehaviour
     public LayerMask hittableLayer;
     public GameObject bulletHolePrefab;
 
-
     [Header("Shoot Parameter")]
     public float fireRange = 200; //distacia que recorre la bala
     public float recoilForce = 4f; //retroceso
@@ -23,17 +20,12 @@ public class WeaponController : MonoBehaviour
     public float fireRate = 0.6f;
     private float lastTimeShoot = Mathf.NegativeInfinity; 
     
-    
-    [Header("Reload")]
-    public double reloadTime; //Tiempo de recarga y cambio de modo
-
-
-
     [Header("Ammo Settings")]
     public TextMeshProUGUI ammoText;    //Texto del arma en UI
     public  int ammoMax; //Máxima munición para esta arma   
     public int ammoCount; //conteo de munición
-  
+    bool isReloading = false;
+    public float timeToCharge;
 
     [Header("Ammo Shock Settings")]
     public GameObject[] shockBatteryCount = new GameObject[4]; //batería, la habilidad especial 
@@ -45,18 +37,8 @@ public class WeaponController : MonoBehaviour
     public GameObject flashEffect;
     public GameObject shockFlashEffect;
 
-    double startRelaodTime; //Alamacena el momento en el que se hizo la recarga
-    bool isReloading = false;
-
-
-    [Header("Shock")]
-    public float timeToCharge;
-
-
-
     void Awake()
     {
-
         cameraPlayerTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
@@ -88,37 +70,14 @@ public class WeaponController : MonoBehaviour
             TryShot(); //Verifica si es posible disparar
         }
 
-      /*  //recarga balas
+       //recarga balas
         if (Input.GetKeyDown(KeyCode.R) && isReloading == false)
         {
+            isReloading = true;
+            //startRelaodTime = Time.time;
             StartCoroutine(Reload());
-        }*/
-            
-            if (Input.GetKeyDown(KeyCode.R) && isReloading == false)
-            {
-                isReloading = true;
-                startRelaodTime = Time.time;
-                Debug.Log("Regando...");
-            }
-            //Tiempo de recarga
-            if (startRelaodTime + reloadTime < Time.time && isReloading == true)
-            {
-                ammoCount = ammoMax;             
-                ammoText.text = ammoCount.ToString();         
-                isReloading = false;
-            }
-
-            /*
-            if(shockCount < 4)
-            {
-                StartCoroutine("ShockCharger");
-                Debug.Log("charging...");
-                Debug.Log("Shock count " + shockCount);
-
-
-                //if(shockCount == 4)
-              //  StopCoroutine("ShockCharger");
-            }*/
+        }
+          
             transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime * 5);    
     }
 
@@ -168,8 +127,7 @@ public class WeaponController : MonoBehaviour
     private void HandleShot()
     {
         if (shockMode == true)
-        {
-            Debug.Log("Shok Shoot F");
+        {          
             FlashShoot(shockMode);
             AddRecoil(recoilForce / 2f);
         }
@@ -182,6 +140,10 @@ public class WeaponController : MonoBehaviour
            if(Physics.Raycast(cameraPlayerTransform.position, cameraPlayerTransform.forward, out hit, fireRange, hittableLayer))
            {
               GameObject bulletHoleClone = Instantiate(bulletHolePrefab,hit.point + hit.normal *0.0001f,Quaternion.LookRotation(hit.normal));
+                if (hit.transform.gameObject.CompareTag("Target"))
+                {
+                    hit.transform.gameObject.SetActive(false);
+                }
               Destroy(bulletHoleClone, 4f);
            }
             Debug.Log("Ammo Shoot");
@@ -274,7 +236,7 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    /*
+    
     IEnumerator Reload()
     {
         Debug.Log("Recargando...");
@@ -283,6 +245,7 @@ public class WeaponController : MonoBehaviour
             yield return new WaitForSeconds(timeToCharge);
             ammoCount = ammoMax;
             ammoText.text = ammoCount.ToString();
+            isReloading = false;          
             Debug.Log("Arma cargada");
         }
         else
@@ -290,10 +253,8 @@ public class WeaponController : MonoBehaviour
             yield return new WaitForSeconds(timeToCharge);
             shockCount = shockMaxBattery;
             BatteryUi(shockMaxBattery);
+            isReloading = false;
             Debug.Log("Arma cargada");
-        }
-        
-        
-      
-    }*/
+        }     
+    }
 }
