@@ -22,6 +22,7 @@ public class WeaponController : MonoBehaviour
     
     [Header("Ammo Settings")]
     public TextMeshProUGUI ammoText;    //Texto del arma en UI
+    public int magazineAmmo =1;
     public  int ammoMax; //Máxima munición para esta arma   
     public int ammoCount; //conteo de munición
     bool isReloading = false;
@@ -30,6 +31,7 @@ public class WeaponController : MonoBehaviour
     [Header("Ammo Shock Settings")]
     public GameObject[] shockBatteryCount = new GameObject[4]; //batería, la habilidad especial 
     public bool shockMode;
+    public int shockFusionCell = 1;
     private int shockMaxBattery = 4; //máximo de arma choque electrico
     public int shockCount; //conteo de shock 
       
@@ -85,11 +87,10 @@ public class WeaponController : MonoBehaviour
 
     private bool TryShot()
     {
-        Debug.Log("Try Shot");
+        //Debug.Log("Try Shot");
         //Shock fire
         if (shockMode == true && shockCount >0 )
         {
-
             Debug.Log("Shock Shoot");
             HandleShot();
             shockCount--;
@@ -140,9 +141,16 @@ public class WeaponController : MonoBehaviour
            if(Physics.Raycast(cameraPlayerTransform.position, cameraPlayerTransform.forward, out hit, fireRange, hittableLayer))
            {
               GameObject bulletHoleClone = Instantiate(bulletHolePrefab,hit.point + hit.normal *0.0001f,Quaternion.LookRotation(hit.normal));
-                if (hit.transform.gameObject.CompareTag("Target"))
+                if (hit.transform.gameObject.CompareTag("EnergyCell"))
                 {
-                    hit.transform.gameObject.GetComponent<EnergyCell>().Action();
+                    try
+                    {
+                        hit.transform.gameObject.GetComponent<EnergyCell>().Activate();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log(e.Message);
+                    }
                 }
               Destroy(bulletHoleClone, 4f);
            }
@@ -239,22 +247,36 @@ public class WeaponController : MonoBehaviour
     
     IEnumerator Reload()
     {
-        Debug.Log("Recargando...");
-        if(shockMode == false)
+        //Debug.Log("hay " + magazineAmmo + "magazine y "+ shockFusionCell + " Celulas");
+        if (shockMode == false && magazineAmmo > 0)
         {
+            Debug.Log("Recargando...");
             yield return new WaitForSeconds(timeToCharge);
             ammoCount = ammoMax;
             ammoText.text = ammoCount.ToString();
-            isReloading = false;          
+            magazineAmmo--;
+            isReloading = false;
             Debug.Log("Arma cargada");
+            Debug.Log("hay " + magazineAmmo + "magazine y " + shockFusionCell + " Celulas");
         }
-        else
+        else if (shockMode == true && shockFusionCell > 0)
         {
+            Debug.Log("Recargando...");
             yield return new WaitForSeconds(timeToCharge);
             shockCount = shockMaxBattery;
             BatteryUi(shockMaxBattery);
+            shockFusionCell--;
             isReloading = false;
             Debug.Log("Arma cargada");
-        }     
+            Debug.Log("hay " + magazineAmmo + "magazine y " + shockFusionCell + " Celulas");
+        }
+        else
+        {
+            Debug.Log("No Mgazine / FusionCell");
+            isReloading = false;
+        }
+       
+
+        
     }
 }

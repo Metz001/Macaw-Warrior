@@ -11,8 +11,12 @@ public class PlayerWeaponController : MonoBehaviour
     public Transform aimingPosition;
 
     public int activeWeaponIndex { get; private set; }
+    
 
     private WeaponController[] weaponSlots = new WeaponController[5];
+
+    public WeaponController[] WeaponSlots { get => weaponSlots; private set => weaponSlots = value; }
+
 
     // Start is called before the first frame update
     void Start()

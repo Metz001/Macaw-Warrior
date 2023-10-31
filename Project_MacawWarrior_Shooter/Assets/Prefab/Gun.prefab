@@ -458,19 +458,20 @@ MonoBehaviour:
   cameraPlayerTransform: {fileID: 0}
   fireRate: 0.4
   ammoText: {fileID: 8781903703807361986}
+  magazineAmmo: 1
   ammoMax: 25
-  reloadTime: 1.5
   ammoCount: 0
+  timeToCharge: 2
   shockBatteryCount:
   - {fileID: 472572563710700290}
   - {fileID: 8397421511281852786}
   - {fileID: 3095697563486309584}
   - {fileID: 4851330468167615388}
   shockMode: 0
-  shockCount: 0
+  shockFusionCell: 1
+  shockCount: 1
   flashEffect: {fileID: 2783592464918300876, guid: b710cf8ab51c8a84293b467e854ddc56, type: 3}
   shockFlashEffect: {fileID: 2783592464918300876, guid: ba1588eac89ff4a4f90136b8543c0d0c, type: 3}
-  timeToCharge: 2
 --- !u!114 &2870213658565742350
 MonoBehaviour:
   m_ObjectHideFlags: 0

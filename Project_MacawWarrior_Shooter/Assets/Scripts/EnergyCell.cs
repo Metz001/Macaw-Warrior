@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyCell : MonoBehaviour
+public class EnergyCell : MonoBehaviour, IInteractable
 {
+    [Header("References")]
     public GameObject door;
+    [Header("General")]
     public bool activate = false;
-    [SerializeField]
     float speed;
+    public bool destruction = false;
 
     private void Update()
     {
@@ -17,9 +19,19 @@ public class EnergyCell : MonoBehaviour
         if(door.transform.position.y >= 10)
             activate = false;
     }
-    public void Action()
+    public void Activate()
     {
+        //if destrución = false
+            //Intancias prefab humo
+            //SetActive Prefab Energy Cell dañado
+            //SetActuve false prefab Energy Cell normal
+            //Soltar prefab de munnición energía
+      
        activate = true;
 ;   }
 
+    public void Interact()
+    {
+        activate = true;
+    }
 }
