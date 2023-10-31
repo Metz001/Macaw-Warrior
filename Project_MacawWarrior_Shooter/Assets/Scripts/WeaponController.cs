@@ -142,7 +142,7 @@ public class WeaponController : MonoBehaviour
               GameObject bulletHoleClone = Instantiate(bulletHolePrefab,hit.point + hit.normal *0.0001f,Quaternion.LookRotation(hit.normal));
                 if (hit.transform.gameObject.CompareTag("Target"))
                 {
-                    hit.transform.gameObject.SetActive(false);
+                    hit.transform.gameObject.GetComponent<EnergyCell>().Action();
                 }
               Destroy(bulletHoleClone, 4f);
            }
