@@ -361,6 +361,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.9f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.9f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/FusionCell.cs"
+"Assets/Magazine.cs"
 "Assets/Scripts/ButtonDoor.cs"
 "Assets/Scripts/EnergyCell.cs"
 "Assets/Scripts/Interactor.cs"

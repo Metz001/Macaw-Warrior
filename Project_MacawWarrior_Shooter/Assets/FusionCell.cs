@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FusionCell : MonoBehaviour
 {
-         
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
