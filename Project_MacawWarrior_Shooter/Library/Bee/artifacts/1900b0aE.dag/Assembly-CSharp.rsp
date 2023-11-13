@@ -360,11 +360,22 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.9f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.9f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+<<<<<<< Updated upstream
 "Assets/Enemy.cs"
+=======
+"Assets/FusionCell.cs"
+"Assets/Magazine.cs"
+"Assets/Scripts/ButtonDoor.cs"
+"Assets/Scripts/EnergyCell.cs"
+"Assets/Scripts/Interactor.cs"
+>>>>>>> Stashed changes
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/PlayerWeaponController.cs"
 "Assets/Scripts/Sway.cs"
 "Assets/Scripts/WeaponController.cs"
+"Assets/Scripts/Wepon_EnergyGun.cs"
+"Assets/Scripts/_New Wepon.cs"
+"Assets/weapo_Pick.cs"
 -langversion:9.0
 
 /deterministic

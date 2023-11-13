@@ -23268,7 +23268,11 @@
       "DisplayName": "Writing Assembly-CSharp.rsp",
       "ActionType": "WriteFile",
       "PayloadOffset": 1761238,
+<<<<<<< Updated upstream
       "PayloadLength": 33321,
+=======
+      "PayloadLength": 33537,
+>>>>>>> Stashed changes
       "PayloadDebugContentSnippet": "-target:library\r\n-out:\"Library",
       "Inputs": [],
       "Outputs": [
@@ -23280,7 +23284,11 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp2",
       "DisplayName": "Writing Assembly-CSharp.rsp2",
       "ActionType": "WriteFile",
+<<<<<<< Updated upstream
       "PayloadOffset": 1794646,
+=======
+      "PayloadOffset": 1794862,
+>>>>>>> Stashed changes
       "PayloadLength": 0,
       "PayloadDebugContentSnippet": "",
       "Inputs": [],
@@ -23531,11 +23539,22 @@
         "Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll",
         "Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll",
         "Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll",
+<<<<<<< Updated upstream
         "Assets/Enemy.cs",
+=======
+        "Assets/FusionCell.cs",
+        "Assets/Magazine.cs",
+        "Assets/Scripts/ButtonDoor.cs",
+        "Assets/Scripts/EnergyCell.cs",
+        "Assets/Scripts/Interactor.cs",
+>>>>>>> Stashed changes
         "Assets/Scripts/PlayerController.cs",
         "Assets/Scripts/PlayerWeaponController.cs",
         "Assets/Scripts/Sway.cs",
         "Assets/Scripts/WeaponController.cs",
+        "Assets/Scripts/Wepon_EnergyGun.cs",
+        "Assets/Scripts/_New Wepon.cs",
+        "Assets/weapo_Pick.cs",
         "C:/Program Files/Unity/Hub/Editor/2022.3.9f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll",
         "C:/Program Files/Unity/Hub/Editor/2022.3.9f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll",
         "Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.rsp"
@@ -23835,7 +23854,11 @@
       "Annotation": "WriteText Library/Bee/artifacts/1900b0aE.dag/Assembly-CSharp.dll.mvfrm.rsp",
       "DisplayName": "Writing Assembly-CSharp.dll.mvfrm.rsp",
       "ActionType": "WriteFile",
+<<<<<<< Updated upstream
       "PayloadOffset": 1794742,
+=======
+      "PayloadOffset": 1794958,
+>>>>>>> Stashed changes
       "PayloadLength": 9992,
       "PayloadDebugContentSnippet": "Library\\Bee\\artifacts\\mvdfrm\\U",
       "Inputs": [],

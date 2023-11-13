@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class PlayerWeaponController : MonoBehaviour
 {
-    public List<WeaponController> startingWeapons = new List<WeaponController>();
-
+    public List<_NewWeapon> startingWeapons = new List<_NewWeapon>();
+    //Recordar cambiar nombre a WeaponController
     public Transform weaponParentSocket;
     public Transform defaultWeaponPosition;
     public Transform aimingPosition;
 
     public int activeWeaponIndex { get; private set; }
 
-    private WeaponController[] weaponSlots = new WeaponController[5];
+    private _NewWeapon[] weaponSlots = new _NewWeapon[5];
 
+<<<<<<< Updated upstream
+=======
+    public _NewWeapon[] WeaponSlots { get => weaponSlots; private set => weaponSlots = value; }
+
+
+>>>>>>> Stashed changes
     // Start is called before the first frame update
     void Start()
     {
         activeWeaponIndex = -1;
 
-        foreach (WeaponController startingWeapon in startingWeapons)
+        foreach (_NewWeapon startingWeapon in startingWeapons)
         {
             AddWeapon(startingWeapon);
         }
@@ -29,18 +35,36 @@ public class PlayerWeaponController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SwitchWeapon(0);
-        }  
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SwitchWeapon(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SwitchWeapon(2);
+        }
+     
     }
     private void SwitchWeapon(int p_weaponIndex)
     {
-        if(p_weaponIndex != activeWeaponIndex && p_weaponIndex >= 0)
+             
+        if (p_weaponIndex != activeWeaponIndex)
+        {
+            weaponSlots[0].gameObject.SetActive(false);   
+            weaponSlots[1].gameObject.SetActive(false);   
+            weaponSlots[2].gameObject.SetActive(false);   
+            weaponSlots[p_weaponIndex].gameObject.SetActive(true);
+            activeWeaponIndex = p_weaponIndex;
+        }
+        if (p_weaponIndex != activeWeaponIndex && p_weaponIndex >= 0)
         {
             weaponSlots[p_weaponIndex].gameObject.SetActive(true);
             activeWeaponIndex = p_weaponIndex;
         }
     }
 
-    private void AddWeapon(WeaponController p_weaponController)
+    private void AddWeapon(_NewWeapon p_weaponController)
     {
         weaponParentSocket.position = defaultWeaponPosition.position;
 
@@ -49,7 +73,7 @@ public class PlayerWeaponController : MonoBehaviour
         {
             if (weaponSlots[i] == null)
             {
-                WeaponController weaponClone = Instantiate(p_weaponController, weaponParentSocket);
+                _NewWeapon weaponClone = Instantiate(p_weaponController, weaponParentSocket);
                 weaponClone.gameObject.SetActive(false);
 
                 weaponSlots[i] = weaponClone;
