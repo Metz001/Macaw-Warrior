@@ -459,7 +459,7 @@ MonoBehaviour:
   fireRate: 0.4
   ammoText: {fileID: 8781903703807361986}
   magazineAmmo: 1
-  ammoMax: 25
+  ammoMax: 12
   ammoCount: 0
   timeToCharge: 2
   shockBatteryCount:
